@@ -1,6 +1,10 @@
 import sys
 import os
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,6 +37,7 @@ def generate_prd():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='127.0.0.1', port=port)
-    # app.run(host='0.0.0.0', port=port)
+    port = int(os.environ.get('PORT'))
+    host = os.environ.get('HOST')
+    
+    app.run(host=host, port=port, debug=False)
