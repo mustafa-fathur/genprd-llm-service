@@ -1,18 +1,19 @@
-# Gunakan image Python yang sesuai
-FROM python:3.9-slim
+# Use a newer Python image
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirements.txt dan install dependencies
+# Copy requirements.txt and install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Copy seluruh kode aplikasi
+# Copy application code
 COPY . .
 
-# Expose port yang digunakan oleh aplikasi
+# Expose port
 EXPOSE 8080
 
-# Jalankan aplikasi
+# Run the application
 CMD ["python", "app/main.py"]
